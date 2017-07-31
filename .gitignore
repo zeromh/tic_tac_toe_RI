@@ -1,2 +1,2 @@
-ref/
-.ipynb_checkpoints/
+ref/**
+.ipynb_checkpoints/**

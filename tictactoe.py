@@ -102,7 +102,7 @@ class ttt_player(object):
         return self.policy[state]
 
                                    
-    def update_policy(self, current_win_prob, board, state):
+    def update_policy(self, current_win_prob):
         """
         Updates the win probability of a previous state based on the win probability of the current state.
         """
@@ -151,16 +151,16 @@ class ttt_player(object):
                 # Treat win probabilities that are equal up to the 3rd decimal place as equivalent for
                 # the purpose of choosing a move
                 if np.isclose(prob, max_prob, rtol=0, atol=10**-4):
-                        best_move_ixs.append(i)
+                    best_move_ixs.append(i)
                 elif prob > max_prob:
-                        best_move_ixs = [i]
-                        max_prob = prob
+                    best_move_ixs = [i]
+                    max_prob = prob
             if print_output:
                 print 'best move ixs: ', best_move_ixs
                 print 'max_prob: ', max_prob
             move_index = np.random.choice(best_move_ixs)
             if self.prev_state:
-                self.update_policy(max_prob, board, state)  
+                self.update_policy(max_prob)  
 
         self.prev_state = state
         self.prev_state[move_index] = self.mark
@@ -264,7 +264,7 @@ class ttt_game(object):
         else:
             win_prob = 0
         if penultimate_player.player_type == 'computer':
-            penultimate_player.update_policy(win_prob, self.board, self.board)   
+            penultimate_player.update_policy(win_prob)   
     
     
     def play(self):

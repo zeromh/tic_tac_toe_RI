@@ -108,7 +108,7 @@ class ttt_player(object):
         """
         prev_state = tuple(self.prev_state)
         prev_win_prob = self.policy[prev_state]
-        self.policy[prev_state] = prev_win_prob + self.alpha*(current_win_prob - prev_win_prob)
+        self.policy[prev_state] = round(prev_win_prob + self.alpha*(current_win_prob - prev_win_prob), 5)
         
         
     def get_move(self, board, print_output):
@@ -146,15 +146,12 @@ class ttt_player(object):
             for i in possible_move_indices:
                 potential_state = state[:]
                 potential_state[i] = self.mark
-                prob = self.get_prob_from_policy(potential_state)
-                
-                # Treat win probabilities that are equal up to the 3rd decimal place as equivalent for
-                # the purpose of choosing a move
-                if np.isclose(prob, max_prob, rtol=0, atol=10**-4):
-                    best_move_ixs.append(i)
-                elif prob > max_prob:
+                prob = self.get_prob_from_policy(potential_state)                
+                if prob > max_prob:
                     best_move_ixs = [i]
                     max_prob = prob
+                elif prob == max_prob:
+                    best_move_ixs.append(i)
             if print_output:
                 print 'best move ixs: ', best_move_ixs
                 print 'max_prob: ', max_prob

@@ -11,7 +11,7 @@ def print_board(state):
 
 def train_computer_players(playerX, playerO, n_games=200000, adj_pX_epsilon=True, adj_pO_epsilon=True):
     """
-    Trains an "X" computer player and an "O" computer player on 200000 games of tic tac toe.
+    Trains an "X" computer player and an "O" computer player on n_games of tic tac toe.
     By default, player exploration rate is set high to learn quickly, and then is decreased according
     to the following scheme:
     .9 for first 50% of games, .5 for next 40%, 0.0 for the last 10%

@@ -25,8 +25,8 @@ def train_computer_players(playerX, playerO, n_games=200000, adj_pX_epsilon=True
         playerO.set_epsilon(.9)
     game = ttt_game(playerX, playerO, print_output = False)
     for i in range(1, n_games+1):
-        if i/float(n_games) >= .5:
-            if i/float(n_games) >= .9:
+        if i/float(n_games) >= .4:
+            if i/float(n_games) >= .8:
                 if adj_pX_epsilon:
                     playerX.set_epsilon(0)
                 if adj_pO_epsilon:

@@ -20,13 +20,13 @@ def train_computer_players(playerX, playerO, n_games=200000, adj_pX_epsilon=True
     calling this function.
     """
     if adj_pX_epsilon:
-        playerX.set_epsilon(.9)
+        playerX.set_epsilon(.75)
     if adj_pO_epsilon:
-        playerO.set_epsilon(.9)
+        playerO.set_epsilon(.75)
     game = ttt_game(playerX, playerO, print_output = False)
     for i in range(1, n_games+1):
-        if i/float(n_games) >= .4:
-            if i/float(n_games) >= .8:
+        if i/float(n_games) >= .3:
+            if i/float(n_games) >= .7:
                 if adj_pX_epsilon:
                     playerX.set_epsilon(0)
                 if adj_pO_epsilon:
